@@ -1,0 +1,8 @@
+# SERVERLESS
+
+Setups for Serverless Techs
+
+* link:./knative-ocp/README.adoc[KNative - Openshift]
+* link:./knative-k8s/README.adoc[KNative - K8s]
+
+
