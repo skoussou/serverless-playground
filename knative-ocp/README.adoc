@@ -3,4 +3,15 @@
 
 == Tools
 
+* helm 3.1.0+
+
 == Setup
+
+1. Create `openshift-pipelines-operator` and `serverless-operator` operator subscriptions (and some namespaces
+
+	/bootstrap.sh
+	
+2. Create `knative-serving` namespace and an instance of `knative-serving` inside it
+
+	./add-knative-serving.sh
+
