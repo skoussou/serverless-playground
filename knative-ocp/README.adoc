@@ -14,4 +14,56 @@
 2. Create `knative-serving` namespace and an instance of `knative-serving` inside it
 
 	./add-knative-serving.sh
+	
+3. Review Installed CRDs
+
+	$ oc api-resources --api-group=serving.knative.dev
+	NAME             SHORTNAMES      APIGROUP              NAMESPACED   KIND
+	configurations   config,cfg      serving.knative.dev   true         Configuration
+	revisions        rev             serving.knative.dev   true         Revision
+	routes           rt              serving.knative.dev   true         Route
+	services         kservice,ksvc   serving.knative.dev   true         Service
+	
+	
+== Deploy Applications
+
+* See for some further work with the example at xref:anchor-1[Resources on Serverless with KNative Usage]
+
+	echo 'apiVersion: serving.knative.dev/v1
+	kind: Service
+	metadata:
+	  name: hello 
+	  namespace: development 
+	spec:
+	  template:
+	    spec:
+	      containers:
+		- image: docker.io/openshift/hello-openshift 
+		  env:
+		    - name: RESPONSE 
+		      value: "Hello Serverless!"' | oc create -f -
+
+* More complex application example in git repository
+** link:https://github.com/skoussou/spring-boot-bpm-msas-secure/tree/sb-app-keycloak-knative[RHPAM Spring Boot Apps]
+
+
+	
+	
+              
+              
+              
+== Resources on Serverless with KNative Usage
+
+[[anchor-1]]
+* link:https://haralduebele.blog/2020/06/03/serverless-and-knative-part-2-knative-serving/[Serverless and Knative – Part 2: Knative Serving]
+
+	“In contrast to general-purpose containers, stateless request-triggered (i.e. on-demand) autoscaled containers have the following properties:
++
+        - Little or no long-term runtime state (especially in cases where code might be scaled to zero in the absence of request traffic).
+        - Logging and monitoring aggregation (telemetry) is important for understanding and debugging the system, as containers might be created or deleted at any time in response to autoscaling.
+	- Multitenancy is highly desirable to allow cost sharing for bursty applications on relatively stable underlying hardware resources.“	
+
+* link:https://haralduebele.blog/2020/06/02/serverless-and-knative-part-1-installing-knative-on-codeready-containers/[Serverless and Knative – Part 1: Installing Knative on CodeReady Containers]
+* link:https://haralduebele.blog/2020/06/10/serverless-and-knative-part-3-knative-eventing/[Serverless and Knative – Part 3: Knative Eventing]
+* link:https://haralduebele.blog/2020/07/02/knative-example-deploying-a-microservices-application/[Knative Example: Deploying a Microservices Application]              
 
